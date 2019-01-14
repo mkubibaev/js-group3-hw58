@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Modal from "../../components/UI/Modal/Modal";
 import Button from "../../components/UI/Button/Button";
+import Alert from "../../components/UI/Alert/Alert";
 
 class MainContainer extends Component {
     state = {
@@ -8,26 +9,31 @@ class MainContainer extends Component {
     };
 
     showModal = () => {
-        this.setState({modal: true})
+        this.setState({modal: true});
     };
 
     closeModal = () => {
-        this.setState({modal: false})
+        this.setState({modal: false});
     };
 
     continued = () => {
         alert('Continued!');
     };
 
+    dismissAlert = () => {
+        alert('Alert clicked!');
+    };
+
     render() {
         return (
             <div className="container py-3">
-
-                <Button
-                    type="secondary"
-                    label="Show Modal"
-                    clicked={this.showModal}
-                />
+                <div className="mb-3">
+                    <Button
+                        type="secondary"
+                        label="Show Modal"
+                        clicked={this.showModal}
+                    />
+                </div>
 
                 <Modal
                     show={this.state.modal}
@@ -42,6 +48,19 @@ class MainContainer extends Component {
                 >
                     <p>This is modal content</p>
                 </Modal>
+
+                <Alert
+                    type="success"
+                    dismiss={this.dismissAlert}
+                >Success alert with dismiss button</Alert>
+                <Alert
+                    type="warning"
+                >Warning alert without dismiss button</Alert>
+                <Alert
+                    type="danger"
+                    dismiss={this.dismissAlert}
+                    clickDismissable
+                >Danger alert with dismiss button and clickDismissable property</Alert>
 
             </div>
         )
