@@ -1,25 +1,36 @@
 import React from 'react';
+import Button from "../Button/Button";
 
 const Modal = props => {
     return (
         <div className="modal"
              style={{
-                 display: props.show ? 'block': 'none'
+                 display: props.show ? "block": "none"
              }}>
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Modal title</h5>
-                        <button type="button" className="close">
+                        <h5 className="modal-title">{props.title}</h5>
+                        <button
+                            type="button"
+                            className="close"
+                            onClick={props.closed}
+                        >
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div className="modal-body">
-                        <p>Modal body text goes here.</p>
+                        {props.children}
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        {props.buttons.map(button => (
+                            <Button
+                                key={button.label}
+                                type={button.type}
+                                label={button.label}
+                                clicked={button.clicked}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
